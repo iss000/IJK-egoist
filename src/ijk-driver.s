@@ -131,16 +131,19 @@ ijk_read      :.(
               and   #%00011111
               ;invert bits
               eor   #%00011111
-              ;index table to conform to generic format
+              ;store to variable
               sta   _ijk_ljoy
 
               ;select right joystick
               lda   #%10000000
               sta   via_aor
-              ;read back right joystick state and rejig bits
+              ;read back right joystick state
               lda   via_aor
+              ;mask out unused bits
               and   #%00011111
+              ;invert bits
               eor   #%00011111
+              ;store to variable
               sta   _ijk_rjoy
 
               jsr   ijk_release
